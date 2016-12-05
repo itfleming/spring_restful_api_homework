@@ -32,5 +32,17 @@ public class RoomTest {
         
         assertThat(violations.size(), equalTo(1));
 	}
+	
+	@Test
+	public void ensureNameIsNotEmpty(){
+		Room room = new Room();
+		room.setName("");
+		room.setCapacity(12);
+		room.setHavingVc(true);
+		
+		Set<ConstraintViolation<Room>> violations = validator.validate(room);
+		
+		assertThat(violations.size(), equalTo(1));
+	}
 
 }

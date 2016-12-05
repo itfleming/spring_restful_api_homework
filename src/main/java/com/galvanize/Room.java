@@ -1,6 +1,7 @@
 package com.galvanize;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
 
@@ -9,6 +10,7 @@ public class Room {
 	private String id;
 	
 	@NotNull
+	@Size(min= 1)
     private String name;
     private int capacity;
     private boolean havingVc;
