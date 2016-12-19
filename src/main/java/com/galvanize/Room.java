@@ -10,7 +10,7 @@ public class Room {
 	private String id;
 	
 	@NotNull
-	@Size(min= 1, message="Name must not be empty!")
+	@Size(min= 1, message="The name must not be empty!")
     private String name;
     private int capacity;
     private boolean havingVc;
