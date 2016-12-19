@@ -3,13 +3,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.http.HttpStatus.CREATED;
+import static java.util.Collections.singletonList;
 
 import java.util.Map;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,7 +25,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
-@SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
 @WebIntegrationTest
@@ -103,13 +98,13 @@ public class RoomsApiIntegrationTest{
 	  room.setHavingVc(true);
 	  
 	  ResponseEntity<String> response = restTemplate.postForEntity(BASE_URL, room, String.class);
-	  
+
 	  ObjectMapper objectMapper = new ObjectMapper();
 	    Map<String, Object> error = objectMapper.readValue(response.getBody(),
 	            new TypeReference<Map<String, Object>>() {});
-	  
-	  assertThat(error.get("reason"), equalTo("Unprocessable Entity"));
-	  assertThat(error.get("error"), equalTo(singletonList("The name must not be empty!")));
+
+      assertThat(error.get("reason"), equalTo("Unprocessable Entity"));
+	  assertThat(error.get("errors"), equalTo(singletonList("The name must not be empty!")));
   }
 
 }

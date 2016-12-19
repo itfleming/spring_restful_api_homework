@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.galvanize.models.RoomTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2016-12-05T20:48:55" hostname="darkmatter" time="0.097">
+<testsuite name="com.galvanize.models.RoomTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2016-12-19T20:48:08" hostname="darkmatter" time="0.103">
   <properties/>
-  <testcase name="ensureNameIsNotEmpty" classname="com.galvanize.models.RoomTest" time="0.063"/>
-  <testcase name="ensureNameIsNotNull" classname="com.galvanize.models.RoomTest" time="0.034"/>
+  <testcase name="ensureNameIsNotEmpty" classname="com.galvanize.models.RoomTest" time="0.069"/>
+  <testcase name="ensureNameIsNotNull" classname="com.galvanize.models.RoomTest" time="0.033"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
