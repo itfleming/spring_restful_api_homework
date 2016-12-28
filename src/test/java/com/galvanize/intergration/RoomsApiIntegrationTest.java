@@ -1,10 +1,13 @@
 package com.galvanize.intergration;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.http.HttpStatus.CREATED;
 import static java.util.Collections.singletonList;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -30,7 +33,7 @@ import org.springframework.web.client.RestTemplate;
 @WebIntegrationTest
 public class RoomsApiIntegrationTest{
   RestTemplate restTemplate = new TestRestTemplate();
-  final String BASE_URL = "http://localhost:8080/rooms";
+  final String BASE_URL = "http://localhost:8090/rooms";
 
   @Autowired
   RoomsRepository roomsRepository;
@@ -105,6 +108,32 @@ public class RoomsApiIntegrationTest{
 
       assertThat(error.get("reason"), equalTo("Unprocessable Entity"));
 	  assertThat(error.get("errors"), equalTo(singletonList("The name must not be empty!")));
+  }
+
+  @Test
+  public void getRespondsWithStatus(){
+
+
+      ResponseEntity<String> response = restTemplate.getForEntity(BASE_URL, String.class);
+
+      assertThat(response.getStatusCode(), is(HttpStatus.FOUND));
+
+  }
+
+  @Test
+  public void getRespondsWithListOfAllRooms(){
+      Room newRoom = new Room();
+      newRoom.setName("Trev's Room");
+      newRoom.setCapacity(10);
+      newRoom.setHavingVc(false);
+      roomsRepository.save(newRoom);
+
+      ResponseEntity<List> response = restTemplate.getForEntity(BASE_URL, List.class);
+
+
+      assertThat(response.getBody().size(), is(1));
+
+
   }
 
 }

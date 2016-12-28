@@ -24,4 +24,4 @@ blog/bin/
 **/.gradle
 
 hs_err_pid*
-build
+build/*

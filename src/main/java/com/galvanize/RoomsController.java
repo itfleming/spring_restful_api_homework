@@ -2,6 +2,7 @@ package com.galvanize;
 
 import javax.validation.Valid;
 
+import com.mongodb.DBCursor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import static java.util.stream.Collectors.toList;
 
@@ -46,6 +49,16 @@ public class RoomsController {
 				.map(FieldError::getDefaultMessage)
 				.collect(toList()));
 		return errorBody;
+	}
+
+	@RequestMapping(value="/rooms", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.FOUND)
+	public List<Room> listRoom(){
+		List<Room> rooms ;
+
+		rooms = roomsRepository.findAll();
+
+		return rooms;
 	}
 
 }
